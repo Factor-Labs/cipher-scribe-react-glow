@@ -29,11 +29,14 @@ export const DecryptionPanel = () => {
     setIsDecrypting(true);
     
     try {
+      console.log("Starting decryption process...");
+      
       // Simulate decryption delay for better UX
       await new Promise(resolve => setTimeout(resolve, 300));
       
       // Parse the cipher text to extract salt and encrypted data
       const data = JSON.parse(cipherText);
+      console.log("Parsed cipher data");
       
       if (!data.salt || !data.encrypted) {
         throw new Error("Invalid cipher text format");
@@ -41,20 +44,19 @@ export const DecryptionPanel = () => {
       
       // Recreate salt from stored value
       const salt = CryptoJS.enc.Hex.parse(data.salt);
+      console.log("Salt restored");
       
       // Derive the same key using PBKDF2
       const key = CryptoJS.PBKDF2(passphrase, salt, {
-        keySize: 256/32,
+        keySize: 8, // 256 bits / 32 = 8 words
         iterations: 100000
       });
+      console.log("Key derived for decryption");
       
       // Decrypt the text
-      const decrypted = CryptoJS.AES.decrypt(data.encrypted, key, {
-        mode: CryptoJS.mode.CBC,
-        padding: CryptoJS.pad.Pkcs7
-      });
-      
+      const decrypted = CryptoJS.AES.decrypt(data.encrypted, key);
       const decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
+      console.log("Text decrypted");
       
       if (!decryptedText) {
         throw new Error("Invalid passphrase or corrupted cipher text");
@@ -67,9 +69,10 @@ export const DecryptionPanel = () => {
         description: "Your text has been decrypted successfully.",
       });
     } catch (error) {
+      console.error("Decryption error:", error);
       toast({
         title: "Decryption Failed",
-        description: "Invalid passphrase, corrupted cipher text, or incompatible format.",
+        description: `Invalid passphrase, corrupted cipher text, or incompatible format: ${error.message}`,
         variant: "destructive",
       });
       setPlainText("");
