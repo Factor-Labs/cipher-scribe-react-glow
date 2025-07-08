@@ -32,12 +32,32 @@ export const EncryptionPanel = () => {
       // Simulate encryption delay for better UX
       await new Promise(resolve => setTimeout(resolve, 300));
       
-      const encrypted = CryptoJS.AES.encrypt(plainText, passphrase).toString();
-      setCipherText(encrypted);
+      // Generate random salt for PBKDF2
+      const salt = CryptoJS.lib.WordArray.random(256/8);
+      
+      // Derive key using PBKDF2 with 100,000 iterations
+      const key = CryptoJS.PBKDF2(passphrase, salt, {
+        keySize: 256/32,
+        iterations: 100000
+      });
+      
+      // Encrypt the text
+      const encrypted = CryptoJS.AES.encrypt(plainText, key, {
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.Pkcs7
+      });
+      
+      // Combine salt and encrypted data
+      const result = {
+        salt: salt.toString(),
+        encrypted: encrypted.toString()
+      };
+      
+      setCipherText(JSON.stringify(result));
       
       toast({
         title: "Encryption Successful",
-        description: "Your text has been encrypted securely.",
+        description: "Your text has been encrypted securely with PBKDF2.",
       });
     } catch (error) {
       toast({

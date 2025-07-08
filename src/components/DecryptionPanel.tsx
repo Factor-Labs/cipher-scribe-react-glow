@@ -32,7 +32,28 @@ export const DecryptionPanel = () => {
       // Simulate decryption delay for better UX
       await new Promise(resolve => setTimeout(resolve, 300));
       
-      const decrypted = CryptoJS.AES.decrypt(cipherText, passphrase);
+      // Parse the cipher text to extract salt and encrypted data
+      const data = JSON.parse(cipherText);
+      
+      if (!data.salt || !data.encrypted) {
+        throw new Error("Invalid cipher text format");
+      }
+      
+      // Recreate salt from stored value
+      const salt = CryptoJS.enc.Hex.parse(data.salt);
+      
+      // Derive the same key using PBKDF2
+      const key = CryptoJS.PBKDF2(passphrase, salt, {
+        keySize: 256/32,
+        iterations: 100000
+      });
+      
+      // Decrypt the text
+      const decrypted = CryptoJS.AES.decrypt(data.encrypted, key, {
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.Pkcs7
+      });
+      
       const decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
       
       if (!decryptedText) {
@@ -48,7 +69,7 @@ export const DecryptionPanel = () => {
     } catch (error) {
       toast({
         title: "Decryption Failed",
-        description: "Invalid passphrase or corrupted cipher text.",
+        description: "Invalid passphrase, corrupted cipher text, or incompatible format.",
         variant: "destructive",
       });
       setPlainText("");
