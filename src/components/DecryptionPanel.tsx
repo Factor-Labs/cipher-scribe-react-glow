@@ -36,15 +36,15 @@ export const DecryptionPanel = () => {
       
       // Parse the cipher text to extract salt and encrypted data
       const data = JSON.parse(cipherText);
-      console.log("Parsed cipher data");
+      console.log("Parsed cipher data:", data);
       
       if (!data.salt || !data.encrypted) {
         throw new Error("Invalid cipher text format");
       }
       
-      // Recreate salt from stored value
+      // Recreate salt from stored value (now properly stored as hex)
       const salt = CryptoJS.enc.Hex.parse(data.salt);
-      console.log("Salt restored");
+      console.log("Salt restored:", salt);
       
       // Derive the same key using PBKDF2
       const key = CryptoJS.PBKDF2(passphrase, salt, {
