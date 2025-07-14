@@ -39,19 +39,21 @@ export const EncryptionPanel = () => {
       // Generate random salt for PBKDF2 (16 bytes = 128 bits)
       const salt = CryptoJS.lib.WordArray.random(16);
       console.log("Salt generated:", salt);
-      console.log("Salt toString:", salt.toString());
       
       // Derive key using PBKDF2 with 100,000 iterations
       const key = CryptoJS.PBKDF2(passphrase, salt, {
         keySize: 8, // 256 bits / 32 = 8 words
         iterations: 100000
       });
-      console.log("Key derived:", key);
+      console.log("Key derived successfully");
+      
+      // Convert key to hex string for AES encryption
+      const keyString = key.toString(CryptoJS.enc.Hex);
+      console.log("Key converted to string format");
       
       // Encrypt the text using the derived key
-      const encrypted = CryptoJS.AES.encrypt(plainText, key);
-      console.log("Text encrypted:", encrypted);
-      console.log("Encrypted toString:", encrypted.toString());
+      const encrypted = CryptoJS.AES.encrypt(plainText, keyString);
+      console.log("Text encrypted successfully");
       
       // Combine salt and encrypted data
       const result = {
@@ -59,7 +61,7 @@ export const EncryptionPanel = () => {
         encrypted: encrypted.toString()
       };
       
-      console.log("Final result:", result);
+      console.log("Final result prepared");
       setCipherText(JSON.stringify(result));
       
       toast({

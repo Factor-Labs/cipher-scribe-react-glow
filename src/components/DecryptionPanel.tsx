@@ -53,8 +53,12 @@ export const DecryptionPanel = () => {
       });
       console.log("Key derived for decryption");
       
+      // Convert key to hex string for AES decryption
+      const keyString = key.toString(CryptoJS.enc.Hex);
+      console.log("Key converted to string format");
+      
       // Decrypt the text
-      const decrypted = CryptoJS.AES.decrypt(data.encrypted, key);
+      const decrypted = CryptoJS.AES.decrypt(data.encrypted, keyString);
       const decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
       console.log("Text decrypted");
       
