@@ -1,0 +1,67 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F172A"/>
+      <stop offset="50%" style="stop-color:#1E293B"/>
+      <stop offset="100%" style="stop-color:#334155"/>
+    </linearGradient>
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6"/>
+      <stop offset="100%" style="stop-color:#06B6D4"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  
+  <!-- Main container -->
+  <g transform="translate(60, 80)">
+    <!-- Header -->
+    <g transform="translate(540, 80)">
+      <!-- Shield icon with glow -->
+      <rect x="-25" y="-25" width="50" height="50" rx="8" fill="url(#primaryGradient)" filter="url(#glow)"/>
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="white" stroke-width="2.5" fill="none" stroke-linejoin="round" transform="translate(-12, -12)"/>
+      
+      <!-- SafeShare title -->
+      <text x="70" y="15" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="bold" fill="url(#primaryGradient)">SafeShare</text>
+    </g>
+    
+    <!-- Subtitle -->
+    <text x="540" y="200" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#94A3B8" text-anchor="middle">
+      Secure text encryption and decryption with military-grade security
+    </text>
+    
+    <!-- Feature highlights -->
+    <g transform="translate(200, 280)">
+      <!-- Encryption panel mockup -->
+      <rect x="0" y="0" width="320" height="180" rx="12" fill="#1E293B" stroke="#374151" stroke-width="1" opacity="0.8"/>
+      <text x="20" y="30" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#F1F5F9">Encryption</text>
+      <rect x="20" y="45" width="280" height="60" rx="6" fill="#0F172A" stroke="#374151" stroke-width="1"/>
+      <text x="30" y="65" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">Enter your sensitive text...</text>
+      <rect x="20" y="120" width="280" height="30" rx="6" fill="#0F172A" stroke="#374151" stroke-width="1"/>
+      <text x="30" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">Password</text>
+      
+      <!-- Decryption panel mockup -->
+      <rect x="400" y="0" width="320" height="180" rx="12" fill="#1E293B" stroke="#374151" stroke-width="1" opacity="0.8"/>
+      <text x="420" y="30" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#F1F5F9">Decryption</text>
+      <rect x="420" y="45" width="280" height="60" rx="6" fill="#0F172A" stroke="#374151" stroke-width="1"/>
+      <text x="430" y="65" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">Paste encrypted text...</text>
+      <rect x="420" y="120" width="280" height="30" rx="6" fill="#0F172A" stroke="#374151" stroke-width="1"/>
+      <text x="430" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">Password</text>
+    </g>
+    
+    <!-- Security features -->
+    <g transform="translate(540, 500)">
+      <text x="0" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#64748B" text-anchor="middle">
+        ⚡ AES + PBKDF2 • 🔒 Client-side only • 🚀 100,000 iterations
+      </text>
+    </g>
+  </g>
+</svg>
