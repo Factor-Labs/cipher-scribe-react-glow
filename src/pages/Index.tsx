@@ -1,11 +1,24 @@
 import { EncryptionPanel } from "@/components/EncryptionPanel";
 import { DecryptionPanel } from "@/components/DecryptionPanel";
-import { Shield } from "lucide-react";
+import { Shield, Github } from "lucide-react";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-bg p-4 md:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
+        {/* GitHub Link */}
+        <div className="flex justify-end mb-4 animate-fade-in">
+          <a
+            href="https://github.com/Factor-Labs/cipher-scribe-react-glow"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 rounded-lg bg-card/50 backdrop-blur-sm border border-border hover:bg-card/80 transition-all duration-200 hover:shadow-glow"
+            aria-label="View source code on GitHub"
+          >
+            <Github className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
+          </a>
+        </div>
+
         {/* Header */}
         <div className="text-center mb-8 animate-fade-in">
           <div className="flex items-center justify-center gap-3 mb-4">
@@ -19,6 +32,11 @@ const Index = () => {
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             Secure text encryption and decryption with PBKDF2 key derivation. Share sensitive information with military-grade security.
           </p>
+          <div className="mt-6 p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg max-w-2xl mx-auto">
+            <p className="text-sm text-blue-600 dark:text-blue-400 text-center">
+              💡 <strong>Tip:</strong> Share the passphrase once per recipient to share multiple encrypted messages.
+            </p>
+          </div>
         </div>
 
         {/* Main Content - Split Layout */}
