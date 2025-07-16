@@ -81,12 +81,6 @@ const Index = () => {
                 </ul>
               </div>
             </div>
-            <div className="mt-6 p-4 bg-amber-500/10 border border-amber-500/20 rounded-lg">
-              <p className="text-sm text-amber-600 dark:text-amber-400">
-                <strong>Security Note:</strong> Always share encrypted text and passwords through different channels for maximum security. 
-                The passphrase can be shared once per recipient via a secure channel, then multiple encrypted messages can be sent using the same passphrase.
-              </p>
-            </div>
           </div>
         </div>
 
